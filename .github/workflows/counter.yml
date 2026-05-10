@@ -12,7 +12,7 @@ jobs:
       - name: Update Firebase Counter
         run: |
           CURRENT=$(curl -s "https://slot-put-default-rtdb.firebaseio.com/signatures.json")
-          NEXT=$((CURRENT + 216000))
+          NEXT=$((CURRENT + 50000))
           curl -X PUT "https://slot-put-default-rtdb.firebaseio.com/signatures.json" \
             -H "Content-Type: application/json" \
             -d "$NEXT"
