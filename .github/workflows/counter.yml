@@ -1,0 +1,18 @@
+name: Slot Out Counter
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update-counter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Firebase Counter
+        run: |
+          CURRENT=$(curl -s "https://slot-put-default-rtdb.firebaseio.com/signatures.json")
+          NEXT=$((CURRENT + 216000))
+          curl -X PUT "https://slot-put-default-rtdb.firebaseio.com/signatures.json" \
+            -H "Content-Type: application/json" \
+            -d "$NEXT"
